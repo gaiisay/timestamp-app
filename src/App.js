@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import { ButtonGroup } from "./components/ButtonGroup";
+import { Day } from "./components/Day";
+import { getDayString } from "./utils/helpers";
+import { useLocalStorage } from "./utils/hooks";
 
-function App() {
+// toggle Button Text
+
+export default function App() {
+  const [dates, setDates] = useLocalStorage("workDates", [
+    { day: getDayString() },
+  ]);
+
+  if (!dates) return "Something went wrong";
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <main>
+        <Day dates={dates}></Day>
+      </main>
+      <footer>
+        <StyledNav>
+          <ButtonGroup setDates={setDates}></ButtonGroup>
+        </StyledNav>
+      </footer>
+    </>
   );
 }
 
-export default App;
+const StyledNav = styled.nav`
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+`;
