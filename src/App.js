@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { ButtonGroup } from "./components/ButtonGroup";
 import { Day } from "./components/Day";
@@ -10,6 +11,10 @@ export default function App() {
   const [dates, setDates] = useLocalStorage("workDates", [
     { day: getDayString() },
   ]);
+
+  useEffect(() => {
+    document.title = "Timestamp App";
+  }, []);
 
   if (!dates) return "Something went wrong";
 

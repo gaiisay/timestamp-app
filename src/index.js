@@ -9,7 +9,6 @@ root.render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
       <CssBaseline />
-
       <App />
     </React.StrictMode>
   </ThemeProvider>
