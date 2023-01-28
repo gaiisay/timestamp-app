@@ -21,14 +21,14 @@ export function MyTimeline({ startTime, endTime }) {
     >
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot />
+          <TimelineDot color="primary" variant="outlined" />
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>{startTime}</TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot />
+          <TimelineDot color="secondary" variant="outlined" />
         </TimelineSeparator>
         <TimelineContent>{endTime}</TimelineContent>
       </TimelineItem>

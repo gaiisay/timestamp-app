@@ -30,38 +30,41 @@ export function ButtonGroup({ setDates }) {
           color={workText === "Start" ? "primary" : "secondary"}
           startIcon={<Work />}
           onClick={() => {
-            setWorkText(workText === "Start" ? "Stop" : "Start");
             setDates((oldDate) => {
-              const day = getDayString();
-              let newDate = oldDate.map((date) => {
-                if (date && date.day === day) {
-                  if (!date.work?.startTime) {
-                    return {
-                      ...date,
+              const lastPos = oldDate.length - 1;
+              const today = getDayString();
+              let newDate;
+              if (workText === "Start") {
+                if (oldDate[lastPos].day === today) {
+                  oldDate[lastPos] = {
+                    ...oldDate[lastPos],
+                    work: { startTime: getTimeString() },
+                  };
+                  newDate = [...oldDate];
+                } else {
+                  newDate = [
+                    ...oldDate,
+                    {
+                      day: getDayString(),
                       work: {
                         startTime: getTimeString(),
                       },
-                    };
-                  } else {
-                    return {
-                      ...date,
-                      work: {
-                        startTime: date.work.startTime,
-                        endTime: getTimeString(),
-                      },
-                    };
-                  }
-                } else {
-                  return {
-                    day: getDayString(),
-                    work: {
-                      startTime: getTimeString(),
                     },
-                  };
+                  ];
                 }
-              });
+              } else {
+                oldDate[lastPos] = {
+                  ...oldDate[lastPos],
+                  work: {
+                    startTime: oldDate[lastPos].work.startTime,
+                    endTime: getTimeString(),
+                  },
+                };
+                newDate = [...oldDate];
+              }
               return newDate;
             });
+            setWorkText(workText === "Start" ? "Stop" : "Start");
           }}
         >
           {workText}
@@ -74,38 +77,31 @@ export function ButtonGroup({ setDates }) {
           color={breakText === "Start" ? "primary" : "secondary"}
           startIcon={<FreeBreakfast />}
           onClick={() => {
-            setBreakText(breakText === "Start" ? "Stop" : "Start");
             setDates((oldDate) => {
-              const day = getDayString();
-              let newDate = oldDate.map((date) => {
-                if (date.day === day) {
-                  if (!date.break?.startTime) {
-                    return {
-                      ...date,
-                      break: {
-                        startTime: getTimeString(),
-                      },
-                    };
-                  } else {
-                    return {
-                      ...date,
-                      break: {
-                        startTime: date.break.startTime,
-                        endTime: getTimeString(),
-                      },
-                    };
-                  }
-                } else {
-                  return {
-                    day: getDayString(),
-                    break: {
-                      startTime: getTimeString(),
-                    },
-                  };
-                }
-              });
+              const lastPos = oldDate.length - 1;
+
+              let newDate;
+              if (breakText === "Start") {
+                oldDate[lastPos] = {
+                  ...oldDate[lastPos],
+                  break: {
+                    startTime: getTimeString(),
+                  },
+                };
+                newDate = [...oldDate];
+              } else {
+                oldDate[lastPos] = {
+                  ...oldDate[lastPos],
+                  break: {
+                    startTime: oldDate[lastPos].break.startTime,
+                    endTime: getTimeString(),
+                  },
+                };
+                newDate = [...oldDate];
+              }
               return newDate;
             });
+            setBreakText(breakText === "Start" ? "Stop" : "Start");
           }}
         >
           {breakText}

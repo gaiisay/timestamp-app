@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ButtonGroup } from "./components/ButtonGroup";
 import { Day } from "./components/Day";
 import { getDayString } from "./utils/helpers";
-import { useLocalStorage } from "./utils/hooks";
+import useLocalStorage from "./utils/hooks";
 
 // toggle Button Text
 
