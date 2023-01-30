@@ -2,12 +2,13 @@ import { Clear, FreeBreakfast, Work } from "@mui/icons-material";
 
 import { Button } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { useState } from "react";
+
 import { getDayString, getTimeString } from "../utils/helpers";
+import useLocalStorage from "../utils/hooks";
 
 export function ButtonGroup({ setDates }) {
-  const [workText, setWorkText] = useState("Start");
-  const [breakText, setBreakText] = useState("Start");
+  const [workText, setWorkText] = useLocalStorage("Start");
+  const [breakText, setBreakText] = useLocalStorage("Start");
 
   return (
     <Grid2 container spacing={1} margin="1rem" justifyContent="space-around">
@@ -18,6 +19,8 @@ export function ButtonGroup({ setDates }) {
           startIcon={<Clear />}
           onClick={() => {
             setDates([{ day: getDayString() }]);
+            setWorkText("Start");
+            setBreakText("Start");
           }}
         >
           Clear
