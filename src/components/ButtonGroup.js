@@ -7,8 +7,8 @@ import { getDayString, getTimeString } from "../utils/helpers";
 import useLocalStorage from "../utils/hooks";
 
 export function ButtonGroup({ setDates }) {
-  const [workText, setWorkText] = useLocalStorage("Start");
-  const [breakText, setBreakText] = useLocalStorage("Start");
+  const [workText, setWorkText] = useLocalStorage("workButton", "Start");
+  const [breakText, setBreakText] = useLocalStorage("breakButton", "Start");
 
   return (
     <Grid2 container spacing={1} margin="1rem" justifyContent="space-around">
